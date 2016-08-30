@@ -3,11 +3,11 @@ menu:
   Home: /
   Archives: /archives
   Github:
-    url: https://github.com/klugjo/hexo-theme-clean-blog
+    url: https://github.com/herozgx
     icon: github
 
 # Title on top left of menu. Leave empty to use main blog title
-menu_title: Configurable Title
+menu_title: herozgx's blog
 
 # URL of the Home page image
 index_cover: http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg
@@ -35,7 +35,7 @@ addthis:
 twitter_url:
 twitter_handle:
 facebook_url:
-github_url: https://github.com/klugjo/hexo-theme-clean-blog
+github_url: https://github.com/herozgx
 gitlab_url:
 linkedin_url:
 mailto:
