@@ -2,13 +2,6 @@
 
 ```bash
 git clone https://github.com/herozgx/blog.git
-cd blog/theme/clean-blog
-git submodule init
-git submodule update
-# 默认情况下clone会包含子模块的目录， 但是目录是空的， 必须通过 git submodule inist 和 git submodule update 来获取
-
-# 还好以上可以用一条命令搞定：
-git clone --recursive https://github.com/herozgx/blog.git
 ```
 
 ### 安装node模块
