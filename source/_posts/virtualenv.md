@@ -7,7 +7,7 @@ tags:
 ### 为什么要使用virtualenv
 当需要在同一台主机上部署多个Python项目，而这些项目所依赖的python版本或第三方模块版本不同时， 就会出现不兼容的问题。 此时我们就可以用virtualenv来为每一个项目构建单独的python虚拟环境， 就像把每个项目分别装进独立的沙箱中， 相互不受干扰。
 
-举个例子， 你有一个python项目一直跑在python2.6版本上， 突然有一天公司的服务器统一升级到了RHEL7， 它自带的python2.7或者更高级的版本(例如python3）。 为了项目依然能够正确执行， 你需要降级python版本， 但是Linux/Unix上的很多基础组件都依赖python环境， 用yum downgrade很难实现降级python（因为yum本身就依赖python）。 
+例如， 你有一个python项目一直跑在python2.6版本上， 突然有一天公司的服务器统一升级到了RHEL7， 它自带的python2.7或者更高级的版本(例如python3）。 为了项目依然能够正确执行， 你需要降级python版本， 但是Linux/Unix上的很多基础组件都依赖python环境， 用yum downgrade很难实现降级python（因为yum本身就依赖python）。 
 
 再举个例子， python中存在一些第三方模块同名的问题， 比如一个项目用到了socketio，另一个项目用到了webpy-socketio， 而他们在/usr/lib/python2.7/site-packages目录中都叫做socketio, 此时就会出现软件包相互覆盖的问题。  
 
