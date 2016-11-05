@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="yum简介通常一个软件在不同平台下的二进制格式是不同的， 例如在i386平台下编译的二进制程序拿到X86-64平台上是不能用的。所以通常要在Linux下安装一个软件， 需要将软件源码下载下来在本地进行编译和安装（./configure, make, make install）。 为了解决这个繁琐的过">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Guanxiong Zhao">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="yum详解"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Herozgx&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>yum详解 - Herozgx&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">herozgx's blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/blog/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/herozgx">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>yum详解</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-08-29
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="yum简介"><a href="#yum简介" class="headerlink" title="yum简介"></a>yum简介</h2><p>通常一个软件在不同平台下的二进制格式是不同的， 例如在i386平台下编译的二进制程序拿到X86-64平台上是不能用的。所以通常要在Linux下安装一个软件， 需要将软件源码下载下来在本地进行编译和安装（./configure, make, make install）。 为了解决这个繁琐的过程， 各Linux发行厂商想出了个办法， 世界上的平台无非就那么多种， 我在每种平台上对软件进行编译， 将编译好的二进制程序提供给用户， 用户根据自己的平台各取所需就行了， 不需要再进行编译了。 这就是各Linux发行版的软件包管理方式：在Redhat/CentOS/Fedora采用<a href="/blog/2016/08/30/rpm-detail">RPM包管理</a>。</p>
+<p>这个方式确实解决了多次编译的问题，但是没有解决软件包的依赖关系问题。 通常软件都是建立在其他软件提供的功能基础上的，例如nginx依赖于perl的正则表达式模块儿、 依赖于zlib压缩等。 我们在安装一个软件前， 要优先安装好它所依赖的所有软件包。而它依赖的软件包很有可能还会依赖其他软件包，以此类推， 安装一个软件的过程太过复杂， 太耗费精力。</p>
+<p>该如何解决呢？ </p>
+<p>东方红，太阳升，YUM诞生了！</p>
+<p>YUM(Yellowdog Updater, Modified)是采用RPM包管理的Linux发行版的命令行和包管理程序。YUM解决了RPM包间的依赖关系问题</p>
+<p>yum分为客户端和服务端。 客户端即yum命令， 通过它可以自动安装rpm包及其依赖包； 服务端即yum源站（仓库），提供一个基本的文件服务， 可以是HTTP、FTP、文件系统。</p>
+<h2 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h2><p>当我们安装上任何一个Linux发行版后， 就已经配置好了一个或多个YUM仓库供我们使用， 所以只要机器可以联网， 那么一般yum就可以使用了。 </p>
+<h3 id="yum命令格式"><a href="#yum命令格式" class="headerlink" title="yum命令格式:"></a>yum命令格式:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum [选项] [command] [参数]</div></pre></td></tr></table></figure>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li><p>install</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y gcc       # 安装软件包， 这是最常用的命令</div></pre></td></tr></table></figure>
+</li>
+<li><p>remove | erase</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove -y gcc        # 删除软件包， 同时删除依赖该软件包(gcc)的软件包。</div></pre></td></tr></table></figure>
+</li>
+<li><p>list &amp; info<br>这两个命令的参数一样， list根据参数列出软件的状态（Installed、 Available）， info列出软件的description和summary信息信息，比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ yum list gcc</div><div class="line">Available Packages</div><div class="line">gcc.x86_64                   4.4.7-17.el6                                base</div><div class="line"></div><div class="line">$ yum info gcc</div><div class="line">Available Packages</div><div class="line">Name        : gcc</div><div class="line">Arch        : x86_64</div><div class="line">Version     : 4.4.7</div><div class="line">Release     : 17.el6</div><div class="line">Size        : 10 M</div><div class="line">Repo        : base</div><div class="line">Summary     : Various compilers (C, C++, Objective-C, Java, ...)</div><div class="line">URL         : http://gcc.gnu.org</div><div class="line">License     : GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions</div><div class="line">Description : The gcc package contains the GNU Compiler Collection version 4.4.</div><div class="line">            : You will need this package in order to compile C code.</div></pre></td></tr></table></figure>
+</li>
+<li><p>search<br>当你知道一些关于软件包的信息， 但是又不确定它的名字时, 可以用search命令。 它会优先查找软件名和Summary信息， 若找不到才会去搜索描述信息(Description).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum search 关键字                 # 通过关键字查询yum仓库中匹配的软件名或软件描述信息</div><div class="line">yum search all                    # 会列出仓库的所有软件包</div></pre></td></tr></table></figure>
+</li>
+<li><p>provides | whatprovides<br>用来查找一个文件属于哪个软件包， 文件名一般用绝对路径名， 可以用通配符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum provides `which dig`</div><div class="line">yum provides /etc/named.conf</div></pre></td></tr></table></figure>
+</li>
+<li><p>clean<br>用来清理随着时间在yum缓存中逐渐积累起来的缓存， 路径一般为/var/cache/yum , clean后边可以加多种参数， all最常用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum clean all</div><div class="line">yum clean metadata</div><div class="line">yum clean packages</div></pre></td></tr></table></figure>
+</li>
+<li><p>makecache<br>将可用的仓库中的元数据缓存到本地(默认为/var/cache/yum/目录中)， 增加查询速度</p>
+</li>
+<li><p>repolist<br>列出仓库信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum repolist all</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="创建自己的yum仓库"><a href="#创建自己的yum仓库" class="headerlink" title="创建自己的yum仓库"></a>创建自己的yum仓库</h2><p>yum在线机制是一种C/S架构的服务， Client即上一节介绍的yum命令， Server则是一个提供文件服务的服务器，可以是：</p>
+<ul>
+<li>FTP</li>
+<li>WEB</li>
+<li>FILE</li>
+</ul>
+<p>创建一个yum仓库有以下几个步骤：</p>
+<ol>
+<li><p>安装创建仓库的软件 <code>createrepo</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install createrepo -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个目录作为仓库目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /data         # 目录位置根据自己情况自己指定</div></pre></td></tr></table></figure>
+</li>
+<li><p>将RPM包放入仓库目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data</div><div class="line">wget http://mirrors.163.com/centos/6/os/x86_64/Packages/bind-9.8.2-0.47.rc1.el6.x86_64.rpm</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行createrepo命令<br>createrepo命令需要指定一个目录作为参数， 它在该目录下创建一个repodata的目录来保存仓库的元数据。 每当我们向仓库中添加RPM包时，都需要重新执行createrepo生成元数据信息。<br>假如一个仓库中有很多软件包， 已经用createrepo生成了元数据目录repodata， 此时我们又新增加了1个RPM包， 若重新生成repodata目录代价太大， 我们可以用 <code>--update</code> 只对新rpm包建立元数据信息 , 其他RPM包复用原有的元数据信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">createrepo /data </div><div class="line">createrepo --update /data</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置仓库文件<br>在第4步中，仓库已经建立好了， 我们已经可以利用该仓库进行软件的更新了。 这里有3中方式访问到该仓库（/data目录）: HTTP、FTP、本地访问</p>
+<ul>
+<li><p>WEB方式(http://)<br>在我们的仓库服务器上搭建一个http服务器（Nginx、Apache、Lighttpd等）, 指定一个uri映射到/data即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line">name=My Own Repo</div><div class="line">baseurl=http://myrepo.domian.com/data/</div><div class="line">enabled=1</div><div class="line">gpgcheck=0</div></pre></td></tr></table></figure>
+</li>
+<li><p>FTP方式(ftp://)<br>在仓库服务器上搭建一个匿名FTP服务器（proftpd，vsftpd等），将匿名账号家目录指定为/data</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line">name=My Own Repo</div><div class="line">baseurl=ftp://192.168.1.100/</div><div class="line">enabled=1</div><div class="line">gpgcheck=0</div></pre></td></tr></table></figure>
+</li>
+<li><p>本地文件或NFS挂载(file:///data)<br>只能供仓库服务器自身的yum使用; 或者配置网络文件系统（NFS）实现其他挂载主机的访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line">name=My Own Repo</div><div class="line">baseurl=file:///data/</div><div class="line">enabled=1</div><div class="line">gpgcheck=0</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="国内较好的CentOS源站推荐"><a href="#国内较好的CentOS源站推荐" class="headerlink" title="国内较好的CentOS源站推荐"></a>国内较好的CentOS源站推荐</h2><p>阿里镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># centos-5</div><div class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo</div><div class="line"># centos-6</div><div class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line"># centos-7</div><div class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo</div></pre></td></tr></table></figure></p>
+<p>网易镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># centos-5</div><div class="line">wget -O /etc/yum.repos.d/CentOS5-Base-163.repo http://mirrors.163.com/.help/CentOS5-Base-163.repo </div><div class="line"># centos-6</div><div class="line">wget -O /etc/yum.repos.d/CentOS6-Base-163.repo http://mirrors.163.com/.help/CentOS6-Base-163.repo </div><div class="line"># centos-7</div><div class="line">wget -O /etc/yum.repos.d/CentOS7-Base-163.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo</div></pre></td></tr></table></figure></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/herozgx" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

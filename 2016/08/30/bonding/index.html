@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="什么是bonding？通俗的讲， bonding技术就是讲多块网络设备组成一个网卡的技术。 从而提升了该虚拟接口的吞吐量和高可用性。
+bonding原理在正常情况下，网卡只接收目的硬件地址(MAC Address)是自身MAC的以太网帧，过滤别的数据帧，以减轻驱动程序的负担；但是网卡也支持另外一种被">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Guanxiong Zhao">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="bonding技术及配置"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Herozgx&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>bonding技术及配置 - Herozgx&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">herozgx's blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/blog/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/herozgx">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>bonding技术及配置</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-08-30
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="什么是bonding？"><a href="#什么是bonding？" class="headerlink" title="什么是bonding？"></a>什么是bonding？</h2><p>通俗的讲， bonding技术就是讲多块网络设备组成一个网卡的技术。 从而提升了该虚拟接口的吞吐量和高可用性。</p>
+<h2 id="bonding原理"><a href="#bonding原理" class="headerlink" title="bonding原理"></a>bonding原理</h2><p>在正常情况下，网卡只接收目的硬件地址(MAC Address)是自身MAC的以太网帧，过滤别的数据帧，以减轻驱动程序的负担；但是网卡也支持另外一种被称为混杂promisc的模式，可以接收网络上所有的帧，bonding就运行在这种模式下，而且修改了驱动程序中的mac地址，将两块网卡的MAC地址改成相同，可以接收特定MAC的数据帧。然后把相应的数据帧传送给bond驱动程序处理</p>
+<h2 id="bonding配置"><a href="#bonding配置" class="headerlink" title="bonding配置"></a>bonding配置</h2><h3 id="1-建立bond网卡配置文件ifcfg-bond0"><a href="#1-建立bond网卡配置文件ifcfg-bond0" class="headerlink" title="1.建立bond网卡配置文件ifcfg-bond0"></a>1.建立bond网卡配置文件ifcfg-bond0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DEVICE=bond0</div><div class="line">BOOTPROTO=dhcp</div><div class="line">ONBOOT=yes</div><div class="line">USERCTL=NO</div><div class="line">BONDING_OPTS=&quot;mode=0 miimon=100&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>BONDING_OPTS</p>
+</blockquote>
+<h3 id="2-配置两块真实网卡配置文件"><a href="#2-配置两块真实网卡配置文件" class="headerlink" title="2.配置两块真实网卡配置文件"></a>2.配置两块真实网卡配置文件</h3><p>ifcfg-eth0:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DEVICE=eth0</div><div class="line">BOOTPROTO=none</div><div class="line">ONBOOT=yes</div><div class="line">MASTER=bond0</div><div class="line">SLAVE=yes</div></pre></td></tr></table></figure></p>
+<p>ifcfg-eth1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DEVICE=eth1</div><div class="line">BOOTPROTO=none</div><div class="line">ONBOOT=yes</div><div class="line">MASTER=bond0</div><div class="line">SLAVE=yes</div></pre></td></tr></table></figure></p>
+<h3 id="3-加载bonding模块"><a href="#3-加载bonding模块" class="headerlink" title="3. 加载bonding模块"></a>3. 加载bonding模块</h3><p>通过modprobe加载bonding模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">modprobe bonding</div></pre></td></tr></table></figure></p>
+<p>也可以配置成开机自动加载bonding模块， 在 /etc/modprobe.d/bonding.conf 中添加如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alias bond0 bonding</div></pre></td></tr></table></figure></p>
+<h3 id="4-启动bond0"><a href="#4-启动bond0" class="headerlink" title="4. 启动bond0"></a>4. 启动bond0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ifup bond0</div></pre></td></tr></table></figure>
+<h3 id="5-查看bond0相关信息，-验证带宽"><a href="#5-查看bond0相关信息，-验证带宽" class="headerlink" title="5. 查看bond0相关信息， 验证带宽"></a>5. 查看bond0相关信息， 验证带宽</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat /proc/net/bonding/bond0 </div><div class="line">Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)</div><div class="line"></div><div class="line">Bonding Mode: load balancing (round-robin)</div><div class="line">MII Status: up</div><div class="line">MII Polling Interval (ms): 100</div><div class="line">Up Delay (ms): 0</div><div class="line">Down Delay (ms): 0</div><div class="line"></div><div class="line">Slave Interface: eno33554984</div><div class="line">MII Status: up</div><div class="line">Speed: 1000 Mbps</div><div class="line">Duplex: full</div><div class="line">Link Failure Count: 0</div><div class="line">Permanent HW addr: 00:0c:29:43:46:de</div><div class="line">Slave queue ID: 0</div><div class="line"></div><div class="line">Slave Interface: eno50332208</div><div class="line">MII Status: up</div><div class="line">Speed: 1000 Mbps</div><div class="line">Duplex: full</div><div class="line">Link Failure Count: 0</div><div class="line">Permanent HW addr: 00:0c:29:43:46:e8</div><div class="line">Slave queue ID: 0</div></pre></td></tr></table></figure>
+<p>查看带宽信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ethtool bond0</div></pre></td></tr></table></figure></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/herozgx" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
