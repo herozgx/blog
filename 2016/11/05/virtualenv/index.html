@@ -10,8 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="Virtualenv构建Python虚拟环境当在同一台主机上部署多个Python项目，而这些项目所依赖的python版本或第三方模块版本不相同， 就会出现不兼容的问题。virtualenv构建的Python虚拟环境可以解决这种问题
-举个例子， 你有一个python项目一直跑在python2.6版本上">
+        <meta name="description" content="为什么要使用virtualenv当在同一台主机上部署多个Python项目，而这些项目所依赖的python版本或第三方模块版本不相同， 就会出现不兼容的问题。virtualenv构建的Python虚拟环境可以解决这种问题
+举个例子， 你有一个python项目一直跑在python2.6版本上， 突然有一">
     
 
     <!--Author-->
@@ -21,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Herozgx&#39;s Blog"/>
+        <meta property="og:title" content="Virtualenv构建Python虚拟环境"/>
     
 
     <!--Open Graph Description-->
@@ -32,7 +32,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -43,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Herozgx&#39;s Blog</title>
+    <title>Virtualenv构建Python虚拟环境 - Herozgx&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -134,7 +134,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Untitled</h1>
+                    <h1>Virtualenv构建Python虚拟环境</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
@@ -160,7 +160,7 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h3 id="Virtualenv构建Python虚拟环境"><a href="#Virtualenv构建Python虚拟环境" class="headerlink" title="Virtualenv构建Python虚拟环境"></a>Virtualenv构建Python虚拟环境</h3><p>当在同一台主机上部署多个Python项目，而这些项目所依赖的python版本或第三方模块版本不相同， 就会出现不兼容的问题。virtualenv构建的Python虚拟环境可以解决这种问题</p>
+                <h3 id="为什么要使用virtualenv"><a href="#为什么要使用virtualenv" class="headerlink" title="为什么要使用virtualenv"></a>为什么要使用virtualenv</h3><p>当在同一台主机上部署多个Python项目，而这些项目所依赖的python版本或第三方模块版本不相同， 就会出现不兼容的问题。virtualenv构建的Python虚拟环境可以解决这种问题</p>
 <p>举个例子， 你有一个python项目一直跑在python2.6版本上， 突然有一天公司的服务器统一升级到了RHEL7， 它自带的python2.7或者更高版本(例如python3）。 为了项目依然能够执行， 你需要降级python版本， 但是Linux/Unix上的很多基础组件都依赖python环境， 用yum downgrade很难实现降级python（因为yum本身就依赖python）。 </p>
 <p>再举个例子， python中存在一些第三方模块同名的问题， 比如一个项目用到了socketio，另一个项目用到了webpy-socketio， 而他们在/usr/lib/python2.7/site-packages目录中都叫做socketio, 此时就会出现软件包覆盖的问题。  </p>
 <p>这些情况我们都可以用python的独立虚拟环境来解决。 每个项目的python编译器，依赖包等都在独立的目录中进行管理，互不影响。</p>
