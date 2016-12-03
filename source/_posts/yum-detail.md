@@ -1,7 +1,7 @@
 ---
 title: yum详解
 date: 2016-08-29 23:14:39
-tags:
+tags: 技术
 ---
 
 ## yum简介
