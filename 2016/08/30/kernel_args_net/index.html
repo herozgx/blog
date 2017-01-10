@@ -68,7 +68,7 @@
 <link href="/blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="人文," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="每个人的生活中都有过幸福，期待，赞叹等美好的经历； 也有过伤心，迷茫，畏惧等消极的情绪， 这样才构成了酸甜苦辣咸的五味人生， 才塑造出了一个个鲜活的你我。 这里主要记录那些在我经历中扮演调味剂的音乐、电影、诗词、名言等，愿它们愈久弥香。">
+<meta name="description" content="很多诡异的问题往往是由于系统的参数设置不当导致, 这里主要记录一下Linux常用的网络调优参数, 方便日后查阅，也希望能够帮助到他人。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="那些曾经触碰过我心灵的音乐、电影、诗词">
-<meta property="og:url" content="https://herozgx.github.io/blog/2016/12/03/beauty/index.html">
+<meta property="og:title" content="Linux网络内核参数">
+<meta property="og:url" content="https://herozgx.github.io/blog/2016/08/30/kernel_args_net/index.html">
 <meta property="og:site_name" content="herozgx">
-<meta property="og:description" content="每个人的生活中都有过幸福，期待，赞叹等美好的经历； 也有过伤心，迷茫，畏惧等消极的情绪， 这样才构成了酸甜苦辣咸的五味人生， 才塑造出了一个个鲜活的你我。 这里主要记录那些在我经历中扮演调味剂的音乐、电影、诗词、名言等，愿它们愈久弥香。">
-<meta property="og:updated_time" content="2016-12-03T13:05:16.000Z">
+<meta property="og:description" content="很多诡异的问题往往是由于系统的参数设置不当导致, 这里主要记录一下Linux常用的网络调优参数, 方便日后查阅，也希望能够帮助到他人。">
+<meta property="og:updated_time" content="2017-01-04T15:16:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="那些曾经触碰过我心灵的音乐、电影、诗词">
-<meta name="twitter:description" content="每个人的生活中都有过幸福，期待，赞叹等美好的经历； 也有过伤心，迷茫，畏惧等消极的情绪， 这样才构成了酸甜苦辣咸的五味人生， 才塑造出了一个个鲜活的你我。 这里主要记录那些在我经历中扮演调味剂的音乐、电影、诗词、名言等，愿它们愈久弥香。">
+<meta name="twitter:title" content="Linux网络内核参数">
+<meta name="twitter:description" content="很多诡异的问题往往是由于系统的参数设置不当导致, 这里主要记录一下Linux常用的网络调优参数, 方便日后查阅，也希望能够帮助到他人。">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://herozgx.github.io/blog/2016/12/03/beauty/"/>
+  <link rel="canonical" href="https://herozgx.github.io/blog/2016/08/30/kernel_args_net/"/>
 
 
 
 
 
-  <title> 那些曾经触碰过我心灵的音乐、电影、诗词 | herozgx </title>
+  <title> Linux网络内核参数 | herozgx </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +258,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://herozgx.github.io/blog/blog/2016/12/03/beauty/">
+  <link itemprop="mainEntityOfPage" href="https://herozgx.github.io/blog/blog/2016/08/30/kernel_args_net/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Guanxiong Zhao">
@@ -282,7 +282,7 @@
             
             
               
-                那些曾经触碰过我心灵的音乐、电影、诗词
+                Linux网络内核参数
               
             
           </h1>
@@ -295,8 +295,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-03T00:00:00+08:00">
-                2016-12-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-30T00:06:46+08:00">
+                2016-08-30
               </time>
             
 
@@ -331,19 +331,32 @@
       
 
       
-        <p>每个人的生活中都有过幸福，期待，赞叹等美好的经历； 也有过伤心，迷茫，畏惧等消极的情绪， 这样才构成了酸甜苦辣咸的五味人生， 才塑造出了一个个鲜活的你我。 这里主要记录那些在我经历中扮演调味剂的音乐、电影、诗词、名言等，愿它们愈久弥香。<br><a id="more"></a></p>
-<h2 id="《夜空中最亮的星》"><a href="#《夜空中最亮的星》" class="headerlink" title="《夜空中最亮的星》"></a>《夜空中最亮的星》</h2><p>当我听到这首歌的时候， 正值失恋，北漂，前途漫漫， 这首歌的歌词曾无数次地触碰自己的心灵， 心中的寂寞，对未来的迷茫，对过往的留恋，对人生的怀疑都无处倾诉， 只能寄情于夜空中明亮的星星， 祈祷它能听见并给予我答案。</p>
+        <p>很多诡异的问题往往是由于系统的参数设置不当导致, 这里主要记录一下Linux常用的网络调优参数, 方便日后查阅，也希望能够帮助到他人。<br><a id="more"></a></p>
+<h1 id="ip-forward"><a href="#ip-forward" class="headerlink" title="ip_forward"></a>ip_forward</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proc: /proc/sys/net/ipv4/ip_forward</div><div class="line">sysctl.conf: net.ipv4.ip_forward = 0</div></pre></td></tr></table></figure>
+<ul>
+<li>0: 关闭(默认)</li>
+<li>非0: 启用</li>
+</ul>
+<p>在接口间传递数据包, 这个变量很特殊， 它的变更会导致所有配置参数变为默认配置<br>? 我们设定操作系统做网络转发， 或iptables做FORWARD链时需要开启该参数。</p>
+<h1 id="somaxconn"><a href="#somaxconn" class="headerlink" title="somaxconn"></a>somaxconn</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proc:  /proc/sys/net/core/somaxconn</div><div class="line">sysctl.conf: net.core.somaxconn = 256</div></pre></td></tr></table></figure>
+<p>监听队列长度的上限。 它是操作系统设置的一个全局参数， 规定了每个端口的最大监听队列长度， 默认为128。<br>注意这里的“上限”， 它是操作系统设置的一个阈值， 所有网络应用程序都可以设置自己的监听队列长度(listen()函数的backlog参数)，如nginx中的listen的backlog配置， 只要它不超过somaxconn。 监听队列长度一般取：min(backlog, somaxconn)<br>对于HTTP端口这种处理大量连接请求的端口， 128这个上限有点小， 可以增加到1024以上。</p>
 <blockquote>
-<p>夜空中最亮的星 能否听清<br>那仰望的人  心底的孤独和叹息<br>夜空中最亮的星 能否记起<br>曾与我同行 消失在风里的身影<br>我祈祷拥有一颗透明的心灵<br>和会流泪的眼睛<br>给我再去相信的勇气<br>越过谎言去拥抱你<br>每当我找不到存在的意义<br>每当我迷失在黑夜里<br>哦哦哦 夜空中最亮的星<br>请指引我靠近你<br>…</p>
+<p>The  behavior of the backlog argument on TCP sockets changed with Linux 2.2.  Now it specifies the queue length for completely established sockets waiting to be accepted, instead of the number of incomplete connection requests.  The maximum length of  the  queue  for  incomplete  sockets  can  be  set  using /proc/sys/net/ipv4/tcp_max_syn_backlog.   When syncookies are enabled there is no logical maximum length and this setting is ignored.  See tcp(7) for more information.<br>If the backlog argument is greater than the value in /proc/sys/net/core/somaxconn, then it is silently truncated to that value; the default value in  this file is 128.  In kernels before 2.4.25, this limit was a hard coded value, SOMAXCONN, with the value 128.</p>
+<p>注： Linux2.2内核以后backlog参数含义改为： 已完成3次握手建立了连接， 正在等待被程序accept的队列长度,  属于“连接队列”， 不再是未完成连接的队列长度,  半连接队列的长度改由另一个系统参数设定: tcp_max_syn_backlog  </p>
 </blockquote>
-<h2 id="《不宠无惊过一生》"><a href="#《不宠无惊过一生》" class="headerlink" title="《不宠无惊过一生》"></a>《不宠无惊过一生》</h2><blockquote>
-<p>不乱于心，不困于情。 不畏将来， 不念过往， 如此， 安好！</p>
-</blockquote>
-<p>当伤心难过时， 有时候会放任自己让这种情绪放大， 沉浸其中百无聊赖， 好像世界末日都与我无关， 《夜空中最亮的星》《我不难过》这类歌曲曾满足过我的肆意和放任。 然而当我偶然间在广播中听到了这首诗，顷刻间止住了当时消极情绪的继续泛滥，感觉心灵得到了安慰。 当播音主持讲这首诗出自丰子恺之手时， 心底不自觉地冒出一句“难怪”， 因为曾经有幸阅读过弘一法师的传记， 也曾去李叔同天津故居拜访过， 对其生平的种种非常的敬仰，果然名师出高徒，丰子恺的这句诗瞬间抚平了我的伤口。全文如下：</p>
+<p>参考：<a href="http://veithen.github.io/2014/01/01/how-tcp-backlog-works-in-linux.html" target="_blank" rel="external">backlog in linux</a></p>
+<h1 id="tcp-max-syn-backlog"><a href="#tcp-max-syn-backlog" class="headerlink" title="tcp_max_syn_backlog"></a>tcp_max_syn_backlog</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proc:  /proc/sys/net/ipv4/tcp_max_syn_backlog</div><div class="line">sysctl.conf:  net.ipv4.tcp_max_syn_backlog = 128</div></pre></td></tr></table></figure>
+<p>半连接队列的最大长度。</p>
 <blockquote>
-<p>不乱于心，不困于情，不畏将来，不念过往，如此，安好！<br>深谋若谷，深交若水，深明大义，深悉小节，已然，静舒！<br>善宽以怀，善感以恩，善博以浪，善精以业，这股，最佳！<br>勿感于时，无伤于怀，勿耽于色，勿沉虚妄，从今，进去！<br>无愧于天，无愧于地，无怍于人，无畏于鬼，这样，人生！<br>– 《不宠无惊过一生》丰子恺</p>
+<p>The maximum number of queued connection requests which have still not received an acknowledgement from the connecting client.<br>If this number is exceeded, the kernel will begin dropping requests. The default value of 256 is increased to 1024 when the<br>memory present in the system is adequate or greater (&gt;= 128Mb), and reduced to 128 for those systems with very low memory (&lt;=<br>32Mb). It is recommended that if this needs to be increased above 1024, TCP_SYNQ_HSIZE in include/net/tcp.h be modified to<br>keep TCP_SYNQ_HSIZE*16&lt;=tcp_max_syn_backlog, and the kernel be recompiled.</p>
 </blockquote>
-
+<p>处于LISTEN状态的端口接收到Client的SYN包并发回SYN/ACK包后，状态变为SYN_REVD,  此时尚未收到Client的确认ACK包， 为”半连接状态”， <em>tcp_max_syn_backlog</em>规定了这种半连接的最大个数, 如果超过这个值， 内核将丢弃新来的SYN包。这个参数的最小值为128。<br>提供Web服务的服务器一般需要调大这个参数的值， 因为web服务器会处理高并发的请求。</p>
+<h1 id="tcp-syncookies"><a href="#tcp-syncookies" class="headerlink" title="tcp_syncookies"></a>tcp_syncookies</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proc: /proc/sys/net/ipv4/tcp_syncookies</div><div class="line">sysctl.conf: net.ipv4.tcp_syncookies = 1</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Note, that syncookies is fallback facility. It MUST NOT be used to help highly loaded servers to stand against legal connection rate. If you see synflood warnings in your logs, but investigation shows that they occur because of overload with legal connections, you should tune another parameters until this warning disappear.</p>
+</blockquote>
+<p>如Linux官方文档所述， tcp_syncookies属于后备设施， 它不能帮助解决大量的合法连接造成的服务器负载问题。</p>
+<h1 id="net-ipv4-tcp-timestamps-1"><a href="#net-ipv4-tcp-timestamps-1" class="headerlink" title="net.ipv4.tcp_timestamps = 1"></a>net.ipv4.tcp_timestamps = 1</h1><h1 id="net-ipv4-tcp-tw-recycle-0"><a href="#net-ipv4-tcp-tw-recycle-0" class="headerlink" title="net.ipv4.tcp_tw_recycle = 0"></a>net.ipv4.tcp_tw_recycle = 0</h1><h1 id="net-ipv4-tcp-tw-reuse-0"><a href="#net-ipv4-tcp-tw-reuse-0" class="headerlink" title="net.ipv4.tcp_tw_reuse = 0"></a>net.ipv4.tcp_tw_reuse = 0</h1><h1 id="TIME-WAIT-过多"><a href="#TIME-WAIT-过多" class="headerlink" title="TIME-WAIT 过多"></a>TIME-WAIT 过多</h1><h1 id="CLOSE-WAIT-过多"><a href="#CLOSE-WAIT-过多" class="headerlink" title="CLOSE-WAIT 过多"></a>CLOSE-WAIT 过多</h1>
       
     </div>
 
@@ -364,19 +377,13 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/blog/tags/人文/" rel="tag"># 人文</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2016/12/03/book_list/" rel="next" title="读书">
-                <i class="fa fa-chevron-left"></i> 读书
+              <a href="/blog/2016/08/29/yum/" rel="next" title="Yum详解">
+                <i class="fa fa-chevron-left"></i> Yum详解
               </a>
             
           </div>
@@ -385,8 +392,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/01/10/2017plan/" rel="prev" title="2017年计划">
-                2017年计划 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2016/08/30/bonding/" rel="prev" title="bonding技术及配置">
+                bonding技术及配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -500,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#《夜空中最亮的星》"><span class="nav-number">1.</span> <span class="nav-text">《夜空中最亮的星》</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#《不宠无惊过一生》"><span class="nav-number">2.</span> <span class="nav-text">《不宠无惊过一生》</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ip-forward"><span class="nav-number">1.</span> <span class="nav-text">ip_forward</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#somaxconn"><span class="nav-number">2.</span> <span class="nav-text">somaxconn</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tcp-max-syn-backlog"><span class="nav-number">3.</span> <span class="nav-text">tcp_max_syn_backlog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tcp-syncookies"><span class="nav-number">4.</span> <span class="nav-text">tcp_syncookies</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#net-ipv4-tcp-timestamps-1"><span class="nav-number">5.</span> <span class="nav-text">net.ipv4.tcp_timestamps = 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#net-ipv4-tcp-tw-recycle-0"><span class="nav-number">6.</span> <span class="nav-text">net.ipv4.tcp_tw_recycle = 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#net-ipv4-tcp-tw-reuse-0"><span class="nav-number">7.</span> <span class="nav-text">net.ipv4.tcp_tw_reuse = 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TIME-WAIT-过多"><span class="nav-number">8.</span> <span class="nav-text">TIME-WAIT 过多</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CLOSE-WAIT-过多"><span class="nav-number">9.</span> <span class="nav-text">CLOSE-WAIT 过多</span></a></li></ol></div>
             
 
           </div>
